@@ -1,6 +1,6 @@
 
 
-# <img src="images\vscode.jpg" alt="vscode" style="zoom:60%;" />
+# <img src="images\vscode.jpg" alt="vscode" style="zoom:20%;" />
 
 # C/C++ Snippets
 
@@ -13,15 +13,13 @@ Type a part of the keywords in snippet e.g., "for" and press enter.
 for // Creates a for loop snippet
 ```
 
-Alternatively, one can also just press <kbd>Ctrl</kbd> + <kbd>Space</kbd> (works on Windows, Linux, or Mac) to access the available snippets in the editor.
-
 ## Installation
 
 1. Install Visual Studio Code 1.71.0 or higher
 2. Launch VS Code
 3. From the command palette `Ctrl`+`Shift`+`P` (Windows, Linux) or `Cmd`+`Shift`+`P` (OSX)
 4. Type `ext install` or just simply select `Install Extension`
-5. Choose the extension - Cpp Snippets
+5. Choose the extension - C/C++ Snippets
 6. Relaunch VS Code
 
 *Suggestions for improvement are welcome.*
