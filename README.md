@@ -1,0 +1,2 @@
+# vscode-cpp-snippets
+snippets
