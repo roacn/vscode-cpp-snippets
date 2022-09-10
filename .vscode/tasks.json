@@ -1,0 +1,122 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+  //调试
+      {
+          "type": "cppbuild",
+          "label": "C/C++: g++.exe 生成活动文件",
+          "command": "D:\\includes\\MinGW\\bin\\g++.exe",
+          "args": [
+              "${file}",
+              "-o",
+              "R:\\VisualStudio\\test.exe",      //${fileBasenameNoExtension}.exe"
+              "-fdiagnostics-color=always",
+              "-g",
+              "-Wall",
+              "-static-libgcc",
+            
+          ],
+          "options": {
+              "cwd": "${fileDirname}"
+          },
+          "problemMatcher": [
+              "$gcc"
+          ],
+          "group": {
+              "kind": "build",
+              "isDefault": true
+          },
+          "presentation": {
+              "echo": true,
+              "reveal": "always",
+              "focus": false,
+              "panel": "shared",
+              "showReuseMessage": true,
+              "clear": false
+          },
+          "detail": "调试器生成的任务。"
+      },
+
+
+  //build excute一条龙
+      {
+          "label": "Compile",
+          "command": "g++",
+          "args": [
+              "${file}",
+              "-o",
+              "${fileDirname}/${fileBasenameNoExtension}.exe",
+              "-fdiagnostics-color=always",
+              "-g",
+              "-Wall",
+              "-static-libgcc",
+              "-fexec-charset=GBK"
+          ],
+          "type": "process",
+          "group": "build",
+          "presentation": {
+              "echo": true,
+              "reveal": "always",
+              "focus": false,
+              "panel": "shared"
+          }
+      },
+      {
+          "label": "C/C++: 运行exe",
+          "command": ".\\${fileBasenameNoExtension}.exe",
+          "options": {
+              "cwd": "${fileDirname}",
+          },
+          "problemMatcher": [],
+          "group": "build",
+          "presentation": {
+              "echo": true,
+              "reveal": "always",
+              "focus": false,
+              "panel": "shared",
+              "showReuseMessage": true,
+              "clear": false
+          },
+          "detail": "运行exe"
+      },
+      {
+          "label": "build excute一条龙",
+          "dependsOrder": "sequence",
+          "dependsOn": [
+              "Compile",
+              "C/C++: 运行exe"
+          ],
+          "presentation": {
+              "echo": true,
+              "reveal": "always",
+              "focus": false,
+              "panel": "shared",
+              "showReuseMessage": true,
+              "clear": false
+          },
+          "problemMatcher": []
+      },
+
+
+
+//delete *.exe
+      {
+          "type": "shell",
+          "label": "delete *.exe",
+          "command": "rm *.exe",
+          "group": "none",
+          "presentation": {
+              "echo": true,
+              "reveal": "always",
+              "focus": false,
+              "panel": "shared",
+              "showReuseMessage": true,
+              "clear": false
+          },
+          "problemMatcher": [],
+          "detail": "删除exe文件"
+      },
+  ]
+}
