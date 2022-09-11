@@ -20,6 +20,7 @@
 			"//using namespace std;",
 			"",
 			"$2",
+			"",
 			"int main()",
 			"{",
 				"\t$1",
@@ -28,7 +29,7 @@
 				"\treturn 0;",
 			"}"
 		],
-		"description": "main function"
+		"description": "Code snippet for main function"
 	},
 	"snippets: main(int argc, char* argv[])": {
 		"prefix": "main",
@@ -37,6 +38,7 @@
 			"//using namespace std;",
 			"",
 			"$2",
+			"",
 			"int main(int argc, char* argv[])",
 			"{",
 			"\t$1",
@@ -51,11 +53,12 @@
 		"prefix": "fileheader",
 		"body": [
 			"/**",
-			"  * @file    :${TM_FILENAME}",
-			"  * @brief   :$1",
-			"  * @version :V1.0.0",
-			"  * @date    :${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
-			"  */"
+			" * @file    :${TM_FILENAME}",
+			" * @brief   :$1",
+			" * @version :V1.0.0",
+			" * @date    :${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+			" */",
+			""
 		],
 		"description": "Add file describe"
 	},
@@ -240,9 +243,9 @@
 	"snippets: foreach": {
 		"prefix": "foreach",
 		"body": [
-			"for(auto ${var} : ${collection_to_loop})",
+			"for(auto ${1:var} : ${2:collection_to_loop})",
 			"{",
-			"\t$1",
+			"\t$3",
 			"}"
 		],
 		"description": "Code snippet for range-based for loop (c++11) statement"
@@ -345,6 +348,22 @@
         ],
         "description": "Code snippet for class with inline constructor/destructor"
     },
+	"snippets: Lambda Functions": {
+		"prefix": "lambda",
+		"body": [
+			"[${1:/* capture */}](${2:/* params */})${3:/* opt */}->${4:/* return_type */}{ ${5:/* body */}; };",
+			"",
+		],
+		"description": "Code snippet for lambda functions"
+	},
+	"snippets: ()?A:B Functions": {
+		"prefix": "sm",
+		"body": [
+			"(${1:/* conditional_expression */}) ? ${2:/* true */} : ${3:/* false */};",
+			"",
+		],
+		"description": "Code snippet for ()?A:B functions"
+	},
 	"snippets: interface": {
 		"prefix": "interface",
 		"body": [
@@ -430,11 +449,11 @@
 		"body": [
 			"try",
 			"{",
-			"\t",
+			"\t${1:/* code */}",
 			"}",
-			"catch (const std::exception&)",
+			"catch (${2:const std::exception& e})",
 			"{",
-			"\t$1",
+			"\t${3:std::cerr << e.what() << '\\n';}",
 			"}"
 		],
 		"description": "Code snippet for try catch"
