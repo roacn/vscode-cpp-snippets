@@ -1,0 +1,269 @@
+{
+	"snippets: fileheader": {
+		"prefix": "fileheader",
+		"body": [
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"; ${TM_FILENAME_BASE}.asm",
+			"; ${1:此处注释}",
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"; 使用 nmake 或下列命令进行编译和链接:",
+			"; ml /c /coff ${TM_FILENAME_BASE}.asm",
+			"; link /subsystem:windows ${TM_FILENAME_BASE}.obj",
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"\t\t${2:.386}",
+			"\t\t${3:.model flat,stdcall}",
+			"\t\t${4:.option casemap:none}"
+		],
+		"description": "Code snippet for fileheader"
+	},
+	"snippets: include": {
+		"prefix": "include",
+		"body": [
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"; Include 文件定义",
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"include\t\twindows.inc",
+			"include\t\tgdi32.inc",
+			"includelib\tgdi32.lib",
+			"include\t\tuser32.inc",
+			"includelib\tuser32.lib",
+			"include\t\tkernel32.inc",
+			"includelib\tkernel32.lib\n"
+		],
+		"description": "Code snippet for fileheader"
+	},
+	"snippets: equ": {
+		"prefix": "equ",
+		"body": [
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"; Equ 等值定义",
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"${1:DLG_MAIN}\t\tequ\t${2:1}\n",
+		],
+		"description": "Code snippet for equ"
+	},
+	"snippets: dataseg": {
+		"prefix": "dataseg",
+		"body": [
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"; 数据段",
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"\t\t${1:.data}\n",
+			"\t\t${2:.data?}",
+			"hInstance\tdd\t\t?",
+			"hWinMain\tdd\t\t?",
+			"\t\t${3:.const}",
+			"szText\tdb\t'${4:Win32 Assembly}',0\n"
+		],
+		"description": "Code snippet for dataseg"
+	},
+	"snippets: codeseg": {
+		"prefix": "codeseg",
+		"body": [
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"; 代码段",
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"\t\t${1:.code}",
+		],
+		"description": "Code snippet for codeseg"
+	},
+	"snippets: WindowProc": {
+		"prefix": "WindowProc",
+		"body": [
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"; 窗口过程",
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"${1:_ProcWinMain}\tproc\tuses ebx edi esi hWnd,uMsg,wParam,lParam",
+			"\t\tmov eax,uMsg",
+			";********************************************************************",
+			"\t\t.if eax == WM_CREATE",
+			"\t\t\t${2:;code}",
+			";********************************************************************",
+			"\t\t.elseif eax == WM_CLOSE",
+			"\t\t\tinvoke DestroyWindow,hWinMain",
+			"\t\t\tinvoke PostQuitMessage,NULL",
+			";********************************************************************",
+			"\t\t.else",
+			"\t\t\tinvoke DefWindowProc,hWnd,uMsg,wParam,lParam",
+			"\t\t\tret",
+			"\t\t.endif",
+			";********************************************************************",
+			"\t\txor eax,eax",
+			"\t\tret",
+			"$1\tendp"
+		],
+		"description": "Code snippet for WindowProc"
+	},
+	"snippets: WinMain": {
+		"prefix": "WinMain",
+		"body": [
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"; 主函数",
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"${1:_WinMain}\tproc",			
+			"\t\t${2:;code}",			
+			"\t\tret",
+			"$1\tendp"
+		],
+		"description": "Code snippet for WinMain"
+	},
+	"snippets: start": {
+		"prefix": "start",
+		"body": [
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"; 程序入口",
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"${1:start}:",			
+			"\t\tcall ${2:_WinMain}",
+			"\t\tinvoke ExitProcess,NULL",
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"\t\tend $1"
+		],
+		"description": "Code snippet for start"
+	},
+	"snippets: ProcDlgMain": {
+		"prefix": "ProcDlgMain",
+		"body": [
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"; 主窗口程序过程",
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"${1:_ProcDlgMain}\tproc\tuses ebx edi esi hWnd,uMsg,wParam,lParam",
+			"\t\tmov eax,uMsg",
+			";********************************************************************",
+			"\t\t.if eax == WM_INITDIALOG",
+			"\t\t\t${2:;code}",
+			";********************************************************************",
+			"\t\t.elseif eax == WM_CLOSE",
+			"\t\t\t${3:;code}",
+			"\t\t\tinvoke EndDialog,hWinMain,NULL",
+			";********************************************************************",
+			"\t\t.else",
+			"\t\t\tmov eax,FALSE",
+			"\t\t\tret",
+			"\t\t.endif",
+			";********************************************************************",
+			"\t\tmov eax,TRUE",
+			"\t\tret",
+			"$1\tendp"
+		],
+		"description": "Code snippet for ProcDlgMain"
+	},
+	"snippets: start_dlg": {
+		"prefix": "start_dlg",
+		"body": [
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"; 窗口程序入口",
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"${1:start}:",			
+			"\t\tinvoke\tGetModuleHandle,NULL",
+			"\t\tmov\t\thInstance,eax",
+			"\t\tinvoke\tDialogBoxParam,eax,DLG_MAIN,NULL,offset _ProcDlgMain,0",
+			"\t\tinvoke\tExitProcess,NULL",
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"\t\tend $1"
+		],
+		"description": "Code snippet for start_dlg"
+	},
+	"snippets: function": {
+		"prefix": "function",
+		"body": [
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"; ${1:_func_name}函数",
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"${1:_func_name}\tproc\t${2:;uses ebx edi esi}",			
+			"\t\t${3:;code}",			
+			"\t\tret",
+			"$1\tendp"
+		],
+		"description": "Code snippet for function"
+	},
+	"snippets: pushad": {
+		"prefix": "pushad",
+		"body": [
+			"pushad",
+			"${1:;code}",
+			"popad"		
+		],
+		"description": "Code snippet for pushad"
+	},
+	"snippets: local": {
+		"prefix": "local",
+		"body": [
+			"local ${1:;@var:type}",			
+		],
+		"description": "Code snippet for local"
+	},
+	"snippets: assume": {
+		"prefix": "assume",
+		"body": [
+			"assume\t${1:esi}:${2:ptr}",
+			"$3",
+			"assume\t${1:esi}:nothing"
+		],
+		"description": "Code snippet for assume"
+	},
+	"snippets: if": {
+		"prefix": "if",
+		"body": [
+			".if ${1:;condition}",
+			"\t${2:;code}",
+			".endif"		
+		],
+		"description": "Code snippet for if"
+	},
+	"snippets: while": {
+		"prefix": "while",
+		"body": [
+			".while ${1:TRUE}",
+			"\t.break ${2:;code}",
+			".endw"		
+		],
+		"description": "Code snippet for while"
+	},
+	"snippets: repeat_until": {
+		"prefix": "repeat",
+		"body": [
+			".repeat",
+			"\t${2:;code}",
+			".until"		
+		],
+		"description": "Code snippet for repeat_until"
+	},
+	"snippets: repeat_untilcxz": {
+		"prefix": "repeat_untilcxz",
+		"body": [
+			".repeat",
+			"\t${2:;code}",
+			".untilcxz"		
+		],
+		"description": "Code snippet for repeat_untilcxz"
+	},
+	"snippets: comment_block": {
+		"prefix": "comment_block",
+		"body": [
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+			"; ${1:此处注释}",
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",			
+		],
+		"description": "Code snippet for comment_block"
+	},
+	"snippets: comment_sep": {
+		"prefix": "comment_sep",
+		"body": [
+			";>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",	
+		],
+		"description": "Code snippet for comment_sep"
+	},
+	"snippets: quit": {
+		"prefix": "quit",
+		"body": [
+			"_Quit\tproc",			
+			"\t\tinvoke DestroyWindow,hWinMain",
+			"\t\tinvoke PostQuitMessage,NULL",
+			"\t\tret",
+			"_Quit\tendp"
+		],
+		"description": "Code snippet for quit"
+	},
+}
