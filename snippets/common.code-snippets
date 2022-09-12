@@ -1,25 +1,108 @@
 {
-	"For loop with n": {
-		"prefix": "forn",
+	"snippets: cout": {
+		"prefix": "cout",
 		"body": [
-			"for(int i = 0; i < n; i++)",
-			"{",
-			"\t${1:/* code */}",
-			"}"
+			"std::cout << \"${1:/* message */}\"$2 << std::endl;\n"
 		],
-		"description": "For loop with n"
+		"description": "Code snippet for printing to std::cout, provided the header is set"
 	},
-	"While loop with n": {
-		"prefix": "whilen",
+	"snippets: printf": {
+		"prefix": "printf",
 		"body": [
-			"int i = 0;",
-			"while(i < n)",
-			"{",
-			"\t${1:/* code */}",
-			"\ti++;",
-			"}"
+			"printf(\"${1:_Format}\", ${2:...});\n"
 		],
-		"description": "While loop with n"
+		"description": "Code snippet for printf, provided the header is set"
+	},
+	"snippets: printf_s": {
+		"prefix": "printfs",
+		"body": [
+			"printf_s(\"${1:_Format}\", ${2:...});\n"
+		],
+		"description": "Code snippet for printf, provided the header is set"
+	},
+	"snippets: sprintf": {
+		"prefix": "sprintf",
+		"body": [
+			"sprintf(${1:/* *buffer */}, ${2:/* *format */}, ${3:/* argument */});\n"
+		],
+		"description": "Code snippet for sprintf"
+	},
+	"snippets: swprintf": {
+		"prefix": "swprintf",
+		"body": [
+			"swprintf(${1:/* *buffer */}, ${2:/* size_t */}, ${3:/* *format */}, ${4:/* argument */});\n"
+		],
+		"description": "Code snippet for swprintf"
+	},
+	"snippets: StringCchPrintf": {
+		"prefix": "StringCchPrintf",
+		"body": [
+			"StringCchPrintf(${1:/* pszDest */}, ${2:/* size_t */}, ${3:/* pszFormat */}, ${4:/* ... */});\n"
+		],
+		"description": "Code snippet for StringCchPrintf"
+	},
+	"snippets: StringCbPrintf": {
+		"prefix": "StringCbPrintf",
+		"body": [
+			"StringCbPrintf(${1:/* pszDest */}, ${2:/* size_t */}, ${3:/* pszFormat */}, ${4:/* ... */});\n"
+		],
+		"description": "Code snippet for StringCbPrintf"
+	},
+	"snippets: StringCchVPrintf": {
+		"prefix": "StringCchVPrintf",
+		"body": [
+			"StringCchVPrintf(${1:/* pszDest */}, ${2:/* size_t */}, ${3:/* pszFormat */}, ${4:/* argList */});\n"
+		],
+		"description": "Code snippet for StringCchVPrintf"
+	},
+	"snippets: StringCbVPrintf": {
+		"prefix": "StringCbVPrintf",
+		"body": [
+			"StringCbVPrintf(${1:/* pszDest */}, ${2:/* size_t */}, ${3:/* pszFormat */}, ${4:/* argList */});\n"
+		],
+		"description": "Code snippet for StringCbVPrintf"
+	},
+	"snippets: StringCchCopy": {
+		"prefix": "StringCchCopy",
+		"body": [
+			"StringCchCopy(${1:/* pszDest */}, ${2:/* size_t */}, ${3:/* pszSrc */});\n"
+		],
+		"description": "Code snippet for StringCchCopy"
+	},
+	"snippets: StringCchCopyN": {
+		"prefix": "StringCchCopyN",
+		"body": [
+			"StringCchCopyN(${1:/* pszDest */}, ${2:/* size_t cchDest */}, ${3:/* pszSrc */}, ${4:/* size_t cchToCopy */});\n"
+		],
+		"description": "Code snippet for StringCchCopyN"
+	},
+	"snippets: StringCbCopy": {
+		"prefix": "StringCbCopy",
+		"body": [
+			"StringCbCopy(${1:/* pszDest */}, ${2:/* size_t */}, ${3:/* pszSrc */});\n"
+		],
+		"description": "Code snippet for StringCbCopy"
+	},
+	"snippets: StringCbCopyN": {
+		"prefix": "StringCbCopyN",
+		"body": [
+			"StringCbCopyN(${1:/* pszDest */}, ${2:/* size_t cbDest */}, ${3:/* pszSrc */}, ${4:/* size_t cbToCopy */});\n"
+		],
+		"description": "Code snippet for StringCbCopyN"
+	},
+	"snippets: StringCchCat": {
+		"prefix": "StringCchCat",
+		"body": [
+			"StringCchCat(${1:/* pszDest */}, ${2:/* size_t */}, ${3:/* pszSrc */});\n"
+		],
+		"description": "Code snippet for StringCchCat"
+	},
+	"snippets: StringCbCat": {
+		"prefix": "StringCbCat",
+		"body": [
+			"StringCbCat(${1:/* pszDest */}, ${2:/* size_t */}, ${3:/* pszSrc */});\n"
+		],
+		"description": "Code snippet for StringCbCat"
 	},
 	"Print element of vector": {
 		"prefix": "coutv",
