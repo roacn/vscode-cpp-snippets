@@ -1,0 +1,203 @@
+{
+"palindrome-String ":
+{
+	"prefix": "palindrome",
+	"body": [
+	"bool ispalindrome(string s)",
+	"{",
+	"\tint n=s.size();",
+	"\tfor(int i=0;i<n;i++)\tif(s[i]!=s[n-i-1]) return 0;",
+	"\treturn 1;",
+	"}"
+	],
+	"description": "String "
+},
+
+"pangram-string":
+{
+	"prefix": "pangram",
+	"body": [
+	"bool ispangram(string s)",
+	"{",
+	"\tint n=s.size();",
+	"\tint f[26]={0}; ",
+	"\tfor(int i=0;i<n;i++)\t",
+	"\t {",
+	"\t\t if(s[i]>='a' && s[i]<='z') ",
+	"\t\t\tf[s[i]-97]++;",
+	"\t\t else",
+	"\t\t if(s[i]>='A' && s[i]<='Z') ",
+	"\t\t\tf[s[i]-65]++;",
+	"\t }",
+	"\t for(int i=0;i<26;i++)",
+	"\t if(f[i]==0) return 0;",
+	"\treturn 1;",
+	"}"
+	],
+	"description": "pangram-string"
+},
+
+"anagram-strings":
+{
+	"prefix": "anagram",
+	"body": [
+	"bool isanagram(string a, string b)",
+	"{",
+	"\tif(a.size()!=b.size()) return 0;",
+	"\tint f[26]={0}; ",
+	"\tfor(int i=0;i<a.size();i++)\t",
+	"\t {",
+	"\t\t if(a[i]>='a' && a[i]<='z') ",
+	"\t\t\tf[a[i]-97]++;",
+	"\t\t else",
+	"\t\t if(a[i]>='A' && a[i]<='Z') ",
+	"\t\t\tf[a[i]-65]++;",
+	"\t }",
+	"\t for(int i=0;i<b.size();i++)\t",
+	"\t {",
+	"\t\t if(b[i]>='a' && b[i]<='z') ",
+	"\t\t\tf[b[i]-97]--;",
+	"\t\t else",
+	"\t\t if(b[i]>='A' && b[i]<='Z') ",
+	"\t\t\tf[b[i]-65]--;",
+	"\t }",
+	"\t for(int i=0;i<26;i++)",
+	"\t if(f[i]!=0) return 0;",
+	"\treturn 1;",
+	"}"
+	],
+	"description": "anagram-strings"
+},
+
+"string->decimal":
+{
+	"prefix": "strtodec",
+	"body": [
+	"long long int string_to_decimal(string s)",
+	"{",
+	"\tlong long int ans = 0, p = 1;",
+	"\tfor (int i = s.size() - 1; i >= 0; i--)",
+	"\t{",
+	"\t\tans += p * (s[i] - '0');",
+	"\t\tp = p * 10;",
+	"\t}",
+	"\treturn ans;",
+	"}"
+	],
+	"description": "string->decimal"
+},
+
+"decimal->string":
+{
+	"prefix": "dectostr",
+	"body": [
+	"string decimal_to_string(long long int n)",
+	"{",
+	"\tif (n == 0)",
+	"\t\treturn 0;",
+	"\tstring ans = \"\";",
+	"\twhile (n > 0)",
+	"\t{",
+	"\t\tans = ans + (char)((n % 10) + 48);",
+	"\t\tn = n / 10;",
+	"\t}",
+	"\treverse(ans.begin(), ans.end());",
+	"\treturn ans;",
+	"}"
+	],
+	"description": "decimal->string"
+},
+
+"occurences of pattern in a string ":
+{
+	"prefix": "kmp",
+	"body": [
+	"vector<int> kmp(string s,string t)\t//returns the indices of occurences of pattern t in string s",
+	"{",
+	"\tif(s.size()<t.size())",
+	"\t\treturn {};",
+	"\t ",
+	"\t int n=s.size(),m=t.size();",
+	"\t int lps[m+1]={0};",
+	"\t int len = 0,i=1,j;",
+	"\twhile (i < m) {",
+	"\t\tif (t[i] ==t[len]) lps[i++] = ++len;",
+	"\t\telse",
+	"\t\t{",
+	"\t\t\tif (len != 0) len = lps[len - 1];",
+	"\t\t\telse\tlps[i++] = 0;",
+	"\t\t\t\t\t\t",
+	"\t\t}",
+	"\t}",
+	"\tvector<int>ans;",
+	"\ti=0;j=0;",
+	"\twhile (i<n) {",
+	"\t\tif (t[j] ==s[i]) { j++; i++; }",
+	"\t\t\t",
+	"\t\tif (j == m) {",
+	"\t\t\tans.pb(i-j);",
+	"\t\t\tj=lps[j - 1];",
+	"\t\t}",
+	"\t\telse if (i < n && t[j]!=s[i]) {",
+	"\t\t\t",
+	"\t\t\tif (j != 0) j = lps[j - 1];",
+	"\t\t\telse i++;\t\t}",
+	"\t}",
+	"\treturn ans;",
+	"}"
+	],
+	"description": "occurences of pattern in a string "
+},
+
+"count of unique characters in a string":
+{
+	"prefix": "distict_characters",
+	"body": [
+	"int distinct_str(string s) {",
+	"\tsort(s.begin(), s.end());",
+	"\treturn unique(s.begin(), s.end()) - s.begin();",
+	"}"
+	],
+	"description": "count of unique characters in a string"
+},
+
+"longest common subsequence of two strings":
+{
+	"prefix": "lc_subsequence",
+	"body": [
+	"string lc_subsequence(string a,string b)",
+	"{",
+	"\tstring ans=\"\";",
+	"\tint n=a.size(),m=b.size(),i,j;",
+	"",
+	"\tint dp[n][m];",
+	"\tdp[0][0]= a[0]==b[0]?1:0;",
+	"\tfor(i=1;i<n;i++) dp[i][0]= a[i]==b[0]?1:dp[i-1][0];",
+	"\tfor(j=1;j<m;j++) dp[0][j]= a[0]==b[j]?1:dp[0][j-1];",
+	"",
+	"\tfor(i=1;i<n;i++)",
+	"\t{",
+	"\t\tfor(j=1;j<m;j++)",
+	"\t\t{",
+	"\t\t if(a[i]==b[j]) dp[i][j]=dp[i-1][j-1]+1;",
+	"\t\t else dp[i][j]=max(dp[i-1][j],dp[i][j-1]);",
+	"\t\t}",
+	"\t}",
+	"\ti = n-1, j = m-1;",
+	"\twhile (i>=0 && j>=0)",
+	"\t{",
+	"\t\tif (a[i] == b[j])",
+	"\t\t{",
+	"\t\t\tans+=a[i]; ",
+	"\t\t\ti--; j--;",
+	"\t\t}",
+	"\t\telse if (dp[i-1][j] > dp[i][j-1]) i--;",
+	"\t\telse j--;",
+	"\t}",
+	"\treverse(ans.begin(),ans.end());",
+	"\treturn ans;",
+	"}"
+	],
+	"description": "longest common subsequence of two strings"
+}
+}

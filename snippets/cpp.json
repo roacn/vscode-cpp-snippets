@@ -628,6 +628,13 @@
 		],
 		"description": "sizeof(var)"
 	},
+	"snippets: sizeof()/sizeof()": {
+		"prefix": "sizeofvarvar",
+		"body": [
+			"sizeof(${1:var1}) / sizeof(${2:var2})"
+		],
+		"description": "length of var1"
+	},
 	"snippets: static_cast": {
 		"prefix": "static_cast",
 		"body": [
