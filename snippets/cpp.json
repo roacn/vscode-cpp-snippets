@@ -1,19 +1,81 @@
 {
-	// Place your snippets for cpp here. Each snippet is defined under a snippet name and has a prefix, body and 
-	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
-	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
-	// same ids are connected.
-	// Example:
-	// "Print to console": {
-	// 	"prefix": "log",
-	// 	"body": [
-	// 		"console.log('$1');",
-	// 		"$2"
-	// 	],
-	// 	"description": "Log output to console"
-	// }
-
-	"snippets: main function": {
+	"Add File Header": {
+		"prefix": "fileheader",
+		"body": [
+			"/**",
+			" * @file    :${TM_FILENAME}",
+			" * @brief   :$1",
+			" * @version :V1.0.0",
+			" * @date    :${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+			" */\n"
+		],
+		"description": "Add file describe"
+	},
+	"pragma once":{
+		"prefix": "#pragma",
+		"body": [
+			"#pragma once\n\n"
+		]
+	},
+	"snippets: #inc": {
+		"prefix": "#inc",
+		"body": [
+			"#include \"$1\""
+		],
+		"description": "Code snippet for #include \" \""
+	},
+	"snippets: #inc<>": {
+		"prefix": "#incj",
+		"body": [
+			"#include <$1>"
+		],
+		"description": "Code snippet for #include \" \""
+	},
+	"snippets: #ifndef _TM_FILENAME_BASE_H": {
+		"prefix": "#ifndef_header",
+		"body": [
+			"#ifndef _${1:${TM_FILENAME_BASE/(.*)/${1:/upcase}/}}_H",
+			"#define _$1_H",
+			"$2\n",
+			"#endif\t// _$1_H"
+		],
+		"description": "Code snippet for #ifdef _XXX_H"
+	},
+	"snippets: #def": {
+		"prefix": "#def",
+		"body": [
+			"#define \"$1\" \"$2\" "
+			],
+		"description": "Code snippet for #define \" \""
+	},
+	"snippets: #ifdef": {
+		"prefix": "#ifdef",
+		"body": [
+			"#ifdef ${_DEBUG}",
+			"$1",
+			"#endif // ${_DEBUG}"
+		],
+		"description": "Code snippet for #ifdef"
+	},
+	"snippets: #ifndef": {
+		"prefix": "#ifndef",
+		"body": [
+			"#ifndef ${1:1}",
+			"$2",
+			"#endif // !$1"
+		],
+		"description": "Code snippet for #ifndef"
+	},
+	"snippets: #if": {
+		"prefix": "#if",
+		"body": [
+			"#ifdef ${1:0}",
+			"$2",
+			"#endif // $1"
+		],
+		"description": "Code snippet for #if"
+	},
+	"snippets: int main()": {
 		"prefix": "main",
 		"body": [			
 			"#include <iostream>",
@@ -31,7 +93,7 @@
 		],
 		"description": "Code snippet for main function"
 	},
-	"snippets: main(int argc, char* argv[])": {
+	"snippets: int main(int argc, char* argv[])": {
 		"prefix": "main",
 		"body": [
 			"#include <iostream>",
@@ -49,26 +111,25 @@
 		],
 		"description": "Code snippet for main function"
 	},
-	"Add File Header": {
-		"prefix": "fileheader",
+	"snippets: void fun(){}": {
+		"prefix": "void_function",
 		"body": [
-			"/**",
-			" * @file    :${TM_FILENAME}",
-			" * @brief   :$1",
-			" * @version :V1.0.0",
-			" * @date    :${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
-			" */",
-			""
+			"void ${1:FunctionName}(${2:/* args */})",
+			"{",
+			"\t${3:/* Code */}",
+			"}"
 		],
-		"description": "Add file describe"
+		"description": "Code snippet for void functionname(args){}"
 	},
-	"pragma once":{
-		"prefix": "pragma",
+	"snippets: fun(){}": {
+		"prefix": "function",
 		"body": [
-			"#pragma once",
-			"",
-			"",
-		]
+			"${1:type} ${2:FunctionName}(${3:/* args */})",
+			"{",
+			"\t${4:/* Code */}",
+			"}"
+		],
+		"description": "Code snippet for functionname(args){}"
 	},
 	"snippets: Class Object": {
 		"prefix": "classh",
@@ -85,9 +146,70 @@
 			"private:",
 			"\t${3:/* data */}",
 			"};",
-			"#endif\t// _$1_H",
+			"#endif\t// _$1_H"
 		],
-		"description": "class .h"
+		"description": "class.h"
+	},
+	"snippets: comment_block": {
+		"prefix": "comment_block",
+		"body": [
+			"/**\n * ${1:Block Comment}\n */\n"
+		],
+		"description": "Comment - Block comment"
+	},
+	"snippets: comment_todo": {
+		"prefix": "comment_todo",
+		"body": [
+			"/**\n\n\tTODO:\n\t- ${1:First todo item}\n\t- ${2:Second todo item}\n\n */\n"
+		],
+		"description": "Comment - Block with To-Do list"
+	},	
+	"snippets: comment_line": {
+		"prefix": "comment_line",
+		"body": [
+			"/* ${1:Comment} */\n"
+		],
+		"description": "Comment - Wrapped comment line"
+	},
+	"snippets: comment_line_dash": {
+		"prefix": "comment_line_dash",
+		"body": [
+			"\n/*--------  ${1:Dash Comment Line}  --------*/\n"
+		],
+		"description": "Comment - Dash wrapped comment line"
+	},
+	"snippets: comment_line_star": {
+		"prefix": "comment_line_star",
+		"body": [
+			"\n/*********  ${1:Star Comment Line}  **********/\n"
+		],
+		"description": "Comment - Star wrapped comment line"
+	},
+	"comment_section": {
+		"prefix": "comment_section",
+		"body": [ "",
+				"/**================================================== *",
+				" * =========  Start of ${1:Section comment block}  ========= *",
+				" * ================================================== */",
+				"\n$0\n",
+				"/* ==========  End of ${1:Section comment block}  ========== */"
+		],
+		"description": "Comment - Section block comment (Both header and footer)"
+	},
+	"comment_section_begin": {
+		"prefix": "comment_section_begin",
+		"body": [ "",
+				"/**================================================== *",
+				" * ==========  ${1:Section comment block}  ========== *",
+				" * ================================================== */",
+				"\n$0\n"
+		],
+		"description": "Comment - Section block comment begin"
+	},
+	"comment_section_end": {
+		"prefix": "comment_section_end",
+		"body": "\n/* =======  End of ${1:Section comment block}  ======= */\n\n",
+		"description": "Comment - Section block comment end"
 	},
 	"snippets: Function Comment": {
 		"prefix": "fcom",
@@ -96,7 +218,7 @@
 			"* @brief ${1:description}",
 			"* @param ${3:name} ${4:usage}",
 			"* @return ${2:type}",
-			"*/"
+			"*/\n"
 		],
 		"description": "Insert function comment"
 	},
@@ -106,7 +228,7 @@
 			"/******************************************************************************/",
 			"/*----------------------------------Includes----------------------------------*/",
 			"/******************************************************************************/",
-			"",
+			""
 		],
 		"description": "Insert include comment"
 	},
@@ -116,7 +238,7 @@
 			"/******************************************************************************/",
 			"/*--------------------------------Internal Macros-----------------------------*/",
 			"/******************************************************************************/",
-			"",
+			""
 		],
 		"description": "Insert internal macro comment"
 	},
@@ -126,7 +248,7 @@
 			"/******************************************************************************/",
 			"/*--------------------------------Enumerations--------------------------------*/",
 			"/******************************************************************************/",
-			"",
+			""
 		],
 		"description": "Insert enum comment"
 	},
@@ -136,7 +258,7 @@
 			"/******************************************************************************/",
 			"/*-----------------------------Data Structures--------------------------------*/",
 			"/******************************************************************************/",
-			"",
+			""
 		],
 		"description": "Insert struct comment"
 	},
@@ -146,7 +268,7 @@
 			"/******************************************************************************/",
 			"/*-------------------------Inline Function Prototypes-------------------------*/",
 			"/******************************************************************************/",
-			"",
+			""
 		],
 		"description": "Insert funtion protype seperator"
 	},
@@ -156,7 +278,7 @@
 			"/******************************************************************************/",
 			"/*-------------------------Inline Function Implementation---------------------*/",
 			"/******************************************************************************/",
-			"",
+			""
 		],
 		"description": "Insert funtion implementation seperator"
 	},
@@ -166,7 +288,7 @@
 			"/******************************************************************************/",
 			"/*-------------------------Static Function Prototypes-------------------------*/",
 			"/******************************************************************************/",
-			"",
+			""
 		],
 		"description": "Insert Static protype seperator"
 	},
@@ -176,7 +298,7 @@
 			"/******************************************************************************/",
 			"/*-------------------------Global Function Prototypes-------------------------*/",
 			"/******************************************************************************/",
-			"",
+			""
 		],
 		"description": "Insert global funtion protype seperator"
 	},
@@ -186,7 +308,7 @@
 			"/******************************************************************************/",
 			"/*---------------------------Function Implementation--------------------------*/",
 			"/******************************************************************************/",
-			"",
+			""
 		],
 		"description": "Insert funtion implementation seperator"
 	},
@@ -196,7 +318,7 @@
 			"/******************************************************************************/",
 			"/*-------------------------Static Variables Definition------------------------*/",
 			"/******************************************************************************/",
-			"",
+			""
 		],
 		"description": "Insert Static Variables seperator"
 	},
@@ -256,7 +378,7 @@
 			"if ($1)",
 			"{",
 			"\t$2",
-			"}"
+			"}\n"
 		],
 		"description": "Code snippet for if statement"
 	},
@@ -276,20 +398,75 @@
 			"else if ($1)",
 			"{",
 			"\t$2",
-			"}"
+			"}\n"
 		],
 		"description": "Code snippet for else-if statement"
 	},
-	"snippets: enum": {
-		"prefix": "enum",
+	"snippets: namespace": {
+		"prefix": "namespace",
 		"body": [
-			"enum ${1:MyEnum}",
+			"namespace ${1:MyNamespace}",
 			"{",
 			"\t$2",
-			"};",
-			"",
+			"}\t//namespace ${1}"
 		],
-		"description": "Code snippet for enum"
+		"description": "Code snippet for namespace"
+	},
+	"snippets: struct": {
+		"prefix": "struct",
+		"body": [
+			"struct ${1:StructName}",
+			"{",
+			"\t$2",
+			"}$3;",
+			"$4"
+		],
+		"description": "Code snippet for struct"
+	},
+	"snippets: typedef struct": {
+		"prefix": "typedef_struct",
+		"body": [
+			"typedef struct _${1:StructName}",
+			"{",
+			"\t$2",
+			"}$1,*p$1;",
+			"$4"
+		],
+		"description": "Code snippet for typedef struct"
+	},
+	"snippets: enum_oneline_val": {
+		"prefix": "enum_oneline_val",
+		"body": [
+			"enum ${1:enum_name}{ ${2:/*enum_table*/}${3:/*, nCount */} } ${4:enum_val};\n"
+		],
+		"description": "enum in oneline with value"
+	},
+	"snippets: enum_oneline": {
+		"prefix": "enum_oneline",
+		"body": [
+			"enum ${1:enum_name}{ ${2:/*enum_table*/}${3:/*, nCount */} };"
+		],
+		"description": "enum in one line"
+	},
+	"snippets: enum_multiline": {
+		"prefix": "enum_multiline",
+		"body": [
+			"enum ${1:enum_name}",
+			"{",
+			"\t${2:/*enum_table*/}, \n\t${3:/* nCount */}",
+			"};"
+		],
+		"description": "enum in multiline"
+	},
+	"snippets: enum_multiline_val": {
+		"prefix": "enum_multiline_val",
+		"body": [
+			"enum ${1:enum_name}",
+			"{",
+			"\t${2:/* enum_table */}, \n\t${3:/* nCount */}",
+			"} ${4:enum_val};\n"
+		],
+		"description": "enum in multiline with value"
 	},
 	"snippets: enum class": {
 		"prefix": "enum class",
@@ -297,10 +474,19 @@
 			"enum class ${1:MyClass}",
 			"{",
 			"\t$2",
-			"};",
-			"",
+			"};\n"
 		],
 		"description": "Code snippet for enum class (c++11)"
+	},
+	"snippets: union": {
+		"prefix": "union",
+		"body": [
+			"union ${1:/* name */}",
+			"{",
+			"\t${2:/* data */}",
+			"};\n"
+		],
+		"description": "union name{}"
 	},
     "snippets: class": {
         "prefix": "class",
@@ -313,16 +499,13 @@
             "\t${1:ClassName}(const ${1:ClassName} &) = default;",
             "\t${1:ClassName} &operator=(${1:ClassName} &&) = default;",
             "\t${1:ClassName} &operator=(const ${1:ClassName} &) = default;",
-            "\t~${1:ClassName}();",
-            "",
+            "\t~${1:ClassName}();\n",
             "private:",
             "\t$2",
-            "};",
-            "",
+            "};\n",
             "${1:ClassName}::${1:ClassName}()",
             "{",
-            "}",
-            "",
+            "}\n",
             "${1:ClassName}::~${1:ClassName}()",
             "{",
             "}"
@@ -340,8 +523,7 @@
             "\t${1:ClassName}(const ${1:ClassName} &) = default;",
             "\t${1:ClassName} &operator=(${1:ClassName} &&) = default;",
             "\t${1:ClassName} &operator=(const ${1:ClassName} &) = default;",
-            "\t~${1:ClassName}() = default;",
-            "",
+            "\t~${1:ClassName}() = default;\n",
             "private:",
             "\t$2",
             "};"
@@ -351,16 +533,14 @@
 	"snippets: Lambda Functions": {
 		"prefix": "lambda",
 		"body": [
-			"[${1:/* capture */}](${2:/* params */})${3:/* opt */}->${4:/* return_type */}{ ${5:/* body */}; };",
-			"",
+			"[${1:/* capture */}](${2:/* params */})${3:/* opt */}->${4:/* return_type */}{ ${5:/* body */}; };"
 		],
 		"description": "Code snippet for lambda functions"
 	},
 	"snippets: ()?A:B Functions": {
 		"prefix": "sm",
 		"body": [
-			"(${1:/* conditional_expression */}) ? ${2:/* true */} : ${3:/* false */};",
-			"",
+			"(${1:/* condition */}) ? ${2:/* true */} : ${3:/* false */};"
 		],
 		"description": "Code snippet for ()?A:B functions"
 	},
@@ -374,75 +554,37 @@
 		],
 		"description": "Code snippet for interface (Visual C++)"
 	},
-	"snippets: namespace": {
-		"prefix": "namespace",
-		"body": [
-			"namespace ${1:MyNamespace}",
-			"{",
-			"\t$2",
-			"}\t//namespace ${1}"
-		],
-		"description": "Code snippet for namespace"
-	},
-	"snippets: #ifdef": {
-		"prefix": "#ifdef",
-		"body": [
-			"#ifdef ${DEBUG}",
-			"$1",
-			"#endif // ${DEBUG}"
-		],
-		"description": "Code snippet for #ifdef"
-	},
-	"snippets: #ifndef": {
-		"prefix": "#ifndef",
-		"body": [
-			"#ifndef ${1:1}",
-			"$2",
-			"#endif // !$1"
-		],
-		"description": "Code snippet for #ifndef"
-	},
-	"snippets: #if": {
-		"prefix": "#if",
-		"body": [
-			"#ifdef ${1:0}",
-			"$2",
-			"#endif // $1"
-		],
-		"description": "Code snippet for #if"
-	},
-	"snippets: struct": {
-		"prefix": "struct",
-		"body": [
-			"struct ${1:MyStruct}",
-			"{",
-			"\t$2",
-			"}$3;",
-			"$4",
-		],
-		"description": "Code snippet for struct"
-	},
-	"snippets: typedef struct": {
-		"prefix": "typedef",
-		"body": [
-			"typedef struct _${1:MyStruct}",
-			"{",
-			"\t$2",
-			"}$1,*p$1;",
-			"$4",
-		],
-		"description": "Code snippet for typedef struct"
-	},
 	"snippets: switch": {
 		"prefix": "switch",
 		"body": [
-			"switch (${switch_on})",
+			"switch (${1:expression})",
 			"{",
+			"case ${2:/* constant-expression */}:",
+			"\t${3:/* code */}",
+			"\tbreak;",
 			"default:",
-			"\tbreak;$1",
-			"}"
+			"\tbreak;",
+			"}\n"
 		],
 		"description": "Code snippet for switch statement"
+	},
+	"snippets: case_break": {
+		"prefix": "case_break",
+		"body": [
+			"case ${1:/* constant-expression */}}:",
+			"\t$2",
+			"\tbreak;\n"
+		],
+		"description": "case:break;"
+	},
+	"snippets: case_return": {
+		"prefix": "case_return",
+		"body": [
+			"case ${1:/* constant-expression */}}:",
+			"\t$2",
+			"\treturn 0;\n"
+		],
+		"description": "case:return;"
 	},
 	"snippets: try": {
 		"prefix": "try",
@@ -454,63 +596,64 @@
 			"catch (${2:const std::exception& e})",
 			"{",
 			"\t${3:std::cerr << e.what() << '\\n';}",
-			"}"
+			"}\n"
 		],
 		"description": "Code snippet for try catch"
-	},
-	"snippets: union": {
-		"prefix": "union",
-		"body": [
-			"union ${MyUnion}",
-			"{",
-			"\t$1",
-			"};"
-		],
-		"description": "Code snippet for union"
 	},
 	"snippets: cout": {
 		"prefix": "cout",
 		"body": [
-			"std::cout << \"${1:/* message */}\"$2 << std::endl;",
-			""
+			"std::cout << \"${1:/* message */}\"$2 << std::endl;\n"
 		],
 		"description": "Code snippet for printing to std::cout, provided the header is set"
 	},
 	"snippets: printf": {
 		"prefix": "printf",
 		"body": [
-			"printf(\"${1:_Format}\", ${2:...});",
-			""
+			"printf(\"${1:_Format}\", ${2:...});\n"
 		],
 		"description": "Code snippet for printf, provided the header is set"
 	},
 	"snippets: printf_s": {
 		"prefix": "printfs",
 		"body": [
-			"printf_s(\"${1:_Format}\", ${2:...});",
-			""
+			"printf_s(\"${1:_Format}\", ${2:...});\n"
 		],
 		"description": "Code snippet for printf, provided the header is set"
 	},
-	"snippets: #inc": {
-		"prefix": "#inc",
+	"snippets: sizeof()": {
+		"prefix": "sizeofvar",
 		"body": [
-			"#include \"$1\""
+			"sizeof(${1:var})"
 		],
-		"description": "Code snippet for #include \" \""
+		"description": "sizeof(var)"
 	},
-	"snippets: #inc<>": {
-		"prefix": "#incj",
+	"snippets: static_cast": {
+		"prefix": "static_cast",
 		"body": [
-			"#include <$1>"
+			"static_cast<${1:type}>(${2:obj});"
 		],
-		"description": "Code snippet for #include \" \""
+		"description": "static_cast<type>(obj);"
 	},
-	"snippets: #def": {
-		"prefix": "#def",
+	"snippets: dynamic_cast": {
+		"prefix": "dynamic_cast",
 		"body": [
-			"#define \"$1\" \"$2\" "
-			],
-		"description": "Code snippet for #define \" \""
+			"dynamic_cast<${1:type}>(${2:obj});"
+		],
+		"description": "dynamic_cast<type>(obj);"
+	},
+	"snippets: const_cast": {
+		"prefix": "const_cast",
+		"body": [
+			"const_cast<${1:type}>(${2:obj});"
+		],
+		"description": "const_cast<type>(obj);"
+	},
+	"snippets: reinterpret_cast": {
+		"prefix": "reinterpret_cast",
+		"body": [
+			"reinterpret_cast<${1:type}>(${2:obj});"
+		],
+		"description": "reinterpret_cast<type>(obj);"
 	}
 }
