@@ -15,10 +15,11 @@
             "environment":[],                                       // 调试程序时的环境变量，可以设置环境变量，比如设置环境变量PATH，可以设置为["PATH=C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem"]
             "MIMode": "gdb",                                        // 指定连接的调试器，可以为gdb或lldb。
             "miDebuggerPath": "D:\\includes\\mingw\\mingw32\\bin\\gdb.exe",  // 调试器路径，Windows下后缀不能省略，Linux下则不要求后缀
-            "setupCommands": [                                      // 为安装基础调试程序而执行的命令
-                {													// STL容器输出格式美化
+            "setupCommands":                                        // 为安装基础调试程序而执行的命令
+            [
+                {
                     "description": "为 gdb 启用整齐打印",
-                    "text": "-enable-pretty-printing",
+                    "text": "-enable-pretty-printing",              // STL容器输出格式美化
                     "ignoreFailures": true
                 },
                 {
