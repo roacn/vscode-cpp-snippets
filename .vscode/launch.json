@@ -16,7 +16,7 @@
             "MIMode": "gdb",                                        // 指定连接的调试器，可以为gdb或lldb。
             "miDebuggerPath": "D:\\includes\\mingw\\mingw32\\bin\\gdb.exe",  // 调试器路径，Windows下后缀不能省略，Linux下则不要求后缀
             "setupCommands": [                                      // 为安装基础调试程序而执行的命令
-                {// 模板自带，好像可以更好地显示STL容器的内容，具体作用自行Google
+                {													// STL容器输出格式美化
                     "description": "为 gdb 启用整齐打印",
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
