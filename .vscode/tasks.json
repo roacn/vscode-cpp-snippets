@@ -3,120 +3,127 @@
   // for the documentation about the tasks.json format
   "version": "2.0.0",
   "tasks": [
-  //调试
-      {
-          "type": "cppbuild",
-          "label": "C/C++: g++.exe 生成活动文件",
-          "command": "D:\\includes\\MinGW\\bin\\g++.exe",
-          "args": [
-              "${file}",
-              "-o",
-              "R:\\VisualStudio\\test.exe",      //${fileBasenameNoExtension}.exe"
-              "-fdiagnostics-color=always",
-              "-g",
-              "-Wall",
-              "-static-libgcc",
-            
-          ],
-          "options": {
-              "cwd": "${fileDirname}"
-          },
-          "problemMatcher": [
-              "$gcc"
-          ],
-          "group": {
-              "kind": "build",
-              "isDefault": true
-          },
-          "presentation": {
-              "echo": true,
-              "reveal": "always",
-              "focus": false,
-              "panel": "shared",
-              "showReuseMessage": true,
-              "clear": false
-          },
-          "detail": "调试器生成的任务。"
-      },
+    // *目前生效任务 "C/C++: g++.exe 生成活动文件"
+    {
+        "type": "cppbuild",                                 // 要自定义的任务类型
+        "label": "C/C++: g++.exe 生成活动文件",              // 任务名称，非常重要！
+        "command": "D:\\includes\\mingw\\mingw32\\bin\\g++.exe",     // 编译器的路径
+        "args": [                                           // 传递给编译器的参数
+            "-fdiagnostics-color=always",                   // 彩色警告信息
+            "-g",                                           // -g 生成gdb调试信息;
+            "-Wall",                                        //-Wall 编译时显示所有的警告消息;
+            "${file}",
+            "-o",                                           // -o 指定生成程序名称;
+            "R:\\VisualStudio\\test.exe",                   // 默认为"${fileDirname}/${fileBasenameNoExtension}.exe",
+            "-fexec-charset=GBK"                            // 生成exe文件使用GBK编码
+        ],                                                  // -g 生成gdb调试信息;  -Wall 编译时显示所有的警告消息; -o 指定生成程序名称;
+        "options": {                                        // 其它可选参数
+            "cwd": "R:\\VisualStudio"                       // 程序的当前工作目录；如果省略，则使用代码的当前工作区根；默认为"cwd": "${fileDirname}",
+        },
+        "problemMatcher": [                                 // 要使用的问题匹配程序
+            "$gcc",
+        ],
+        "group": {                                          // 定义此任务属于的执行组。build，将其添加到生成组；test，将其添加到测试组
+            "kind":"build",                                 // 将任务标记为可通过“运行生成任务”命令访问的生成任务
+            "isDefault": true                               // 定义此任务是组中的默认任务，还是与应触发此任务的文件匹配的glob
+        },
+        "presentation": {                                   // 配置用于“显示任务输出，并读取其输入”的面板
+            "reveal": "always",                             // always 默认，任务执行时显示终端；silent 只任务错误退出，或问题匹配器发现问题时才显示终端; never 任务执行时不显示终端
+            "echo": true,                                   // true 默认，执行命令显示到终端; false 反之亦然
+            "focus": false,                                 // 控制面板是否获取焦点。false 默认；true 编译完成后，获得焦点
+            "panel": "shared",                              // new 终端开启新窗口; shared 任务间共享面板
+            "showReuseMessage": false,                      // true 显示“终端将被任务重用，按任意键关闭”; false 取消提示
+            "clear": true,                                  // 执行任务前清空终端文字
+            "close": false                                  // 控制任务退出时，是否退出终端
+        },
+        "detail": "调试器生成的任务。"                        // 任务的其它详细信息
+    },
 
+    // *编译、运行一条龙，在“终端”→“运行任务”中运行
+    // 依赖任务1
+    {
+        "label": "C/C++: Compile",
+        "command": "D:\\includes\\mingw\\mingw32\\bin\\g++.exe",
+        "args": [
+            "-fdiagnostics-color=always",                   // 彩色警告信息
+            "-g",                                           // -g 生成gdb调试信息;
+            "-Wall",                                        //-Wall 编译时显示所有的警告消息;
+            "${file}",
+            "-o",
+            "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "-static-libgcc",
+            "-fexec-charset=GBK"
+        ],
+        "type": "process",
+        "group": "build",
+        "presentation": {
+            "reveal": "always",                             // always 默认，任务执行时显示终端；silent 只任务错误退出，或问题匹配器发现问题时才显示终端; never 任务执行时不显示终端
+            "echo": true,                                   // true 默认，执行命令显示到终端; false 反之亦然
+            "focus": false,                                 // 控制面板是否获取焦点。false 默认；true 编译完成后，获得焦点
+            "panel": "shared",                              // new 终端开启新窗口; shared 任务间共享面板
+            "showReuseMessage": false,                      // true 显示“终端将被任务重用，按任意键关闭”; false 取消提示
+            "clear": true,                                  // 执行任务前清空终端文字
+            "close": false                                  // 控制任务退出时，是否退出终端
+        },
+        "detail": "编译.exe"
+    },
+    // 依赖任务2
+    {
+        "label": "C/C++: Run",
+        "command": ".\\${fileBasenameNoExtension}.exe",
+        "options": {
+            "cwd": "${fileDirname}",
+        },
+        "problemMatcher": [],
+        "group": "build",
+        "presentation": {
+            "reveal": "always",                             // always 默认，任务执行时显示终端；silent 只任务错误退出，或问题匹配器发现问题时才显示终端; never 任务执行时不显示终端
+            "echo": true,                                   // true 默认，执行命令显示到终端; false 反之亦然
+            "focus": false,                                 // 控制面板是否获取焦点。false 默认；true 编译完成后，获得焦点
+            "panel": "shared",                              // new 终端开启新窗口; shared 任务间共享面板
+            "showReuseMessage": false,                      // true 显示“终端将被任务重用，按任意键关闭”; false 取消提示
+            "clear": false,                                 // 执行任务前清空终端文字
+            "close": false                                  // 控制任务退出时，是否退出终端
+        },
+        "detail": "运行.exe"
+    },
+    // 执行此任务
+    {
+        "label": "C/C++: 编译、运行一条龙",                  // 在launch.json中设置此标签即可开启任务
+        "dependsOrder": "sequence",
+        "dependsOn": [
+            "C/C++: Compile",                               // 依赖任务 "C/C++: Compile"
+            "C/C++: Run"                                    // 依赖任务 "C/C++: Run"
+        ],
+        "presentation": {
+            "echo": true,
+            "reveal": "always",
+            "focus": false,
+            "panel": "shared",
+            "showReuseMessage": false,
+            "clear": false,
+            "close": false                                  // 控制任务退出时，是否退出终端
+        },
+        "problemMatcher": [],
+        "detail": "编译、运行一条龙"
+    },
 
-  //build excute一条龙
-      {
-          "label": "Compile",
-          "command": "g++",
-          "args": [
-              "${file}",
-              "-o",
-              "${fileDirname}/${fileBasenameNoExtension}.exe",
-              "-fdiagnostics-color=always",
-              "-g",
-              "-Wall",
-              "-static-libgcc",
-              "-fexec-charset=GBK"
-          ],
-          "type": "process",
-          "group": "build",
-          "presentation": {
-              "echo": true,
-              "reveal": "always",
-              "focus": false,
-              "panel": "shared"
-          }
-      },
-      {
-          "label": "C/C++: 运行exe",
-          "command": ".\\${fileBasenameNoExtension}.exe",
-          "options": {
-              "cwd": "${fileDirname}",
-          },
-          "problemMatcher": [],
-          "group": "build",
-          "presentation": {
-              "echo": true,
-              "reveal": "always",
-              "focus": false,
-              "panel": "shared",
-              "showReuseMessage": true,
-              "clear": false
-          },
-          "detail": "运行exe"
-      },
-      {
-          "label": "build excute一条龙",
-          "dependsOrder": "sequence",
-          "dependsOn": [
-              "Compile",
-              "C/C++: 运行exe"
-          ],
-          "presentation": {
-              "echo": true,
-              "reveal": "always",
-              "focus": false,
-              "panel": "shared",
-              "showReuseMessage": true,
-              "clear": false
-          },
-          "problemMatcher": []
-      },
-
-
-
-//delete *.exe
-      {
-          "type": "shell",
-          "label": "delete *.exe",
-          "command": "rm *.exe",
-          "group": "none",
-          "presentation": {
-              "echo": true,
-              "reveal": "always",
-              "focus": false,
-              "panel": "shared",
-              "showReuseMessage": true,
-              "clear": false
-          },
-          "problemMatcher": [],
-          "detail": "删除exe文件"
-      },
-  ]
+    // *删除*.exe
+    {
+        "type": "shell",                        // 定义任务被作为进程运行还是shell中作为命令运行
+        "label": "删除exe",                // 标签
+        "command": "del *.exe",
+        "group": "none",                        // 分配为没有组
+        "presentation": {
+            "echo": true,
+            "reveal": "always",
+            "focus": false,
+            "panel": "shared",
+            "showReuseMessage": false,
+            "clear": false
+        },
+        "problemMatcher": [],
+        "detail": "删除exe文件"
+    },
+]
 }
